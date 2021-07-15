@@ -1,0 +1,32 @@
+ISSUE:
+
+,CASE WHEN pre_post = 'Pre' THEN DENSE_RANK() over(partition by accountholder_id,account_fri,account_msisdn order by lower(trim(product_name)) ) ELSE 0 END AS pre_rank
+,CASE WHEN pre_post = 'Post' THEN DENSE_RANK() over(partition by accountholder_id,account_fri,account_msisdn order by lower(trim(product_name)) ) ELSE 0 END AS post_rank
+
+pre_post	product_name	r
+Pre	A	1
+Pre	B	2
+Pre	B	2
+Pre	D	3
+Pre	E	4
+Post	A	5
+Post	A	5
+Post	C	6
+Post	D	7
+
+
+SOLUION:
+
+,CASE WHEN pre_post = 'Pre' THEN DENSE_RANK() over(partition by accountholder_id,account_fri,account_msisdn,pre_post order by lower(trim(product_name)) ) ELSE 0 END AS pre_rank
+,CASE WHEN pre_post = 'Post' THEN DENSE_RANK() over(partition by accountholder_id,account_fri,account_msisdn,pre_post order by lower(trim(product_name)) ) ELSE 0 END AS post_rank
+
+pre_post	product_name	r
+Pre	A	1
+Pre	B	2
+Pre	C	3
+Pre	D	4
+Pre	E	5
+Post	A	1
+Post	B	2
+Post	C	3
+Post	D	4
