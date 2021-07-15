@@ -1,0 +1,13 @@
+Average Function does not count NULL VALUES
+
+Values:
+2
+3
+4
+NULL
+NULL
+
+Result
+9/3 = 3
+Not 
+9/5 
