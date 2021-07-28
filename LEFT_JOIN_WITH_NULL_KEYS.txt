@@ -1,0 +1,16 @@
+ISSUE:
+When joing a table A with table B, and B has NULL in some column on which we are joing then it will produce NULL values in all columns where B.col IS NULL.
+Unlike normal case, when there are no null we get all rows that do not even match the columns. Here it matches the column in B (NULL=NULL) and other columns
+(A.col1=B.col1 and A.NULL = B.NULL). SO it will result in all NULL values in table B.
+
+---------------------------
+|A .col1 | B.col1 | B.col2|
+---------------------------
+| val1   | NULL   | NULL  |
+| val2   | NULL   | NULL  |
+| val3   | NULL   | NULL  |
+---------------------------
+
+SOLUTION:
+https://bertwagner.com/posts/joining-on-nulls/
+
